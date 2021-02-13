@@ -15,3 +15,13 @@
     ◦ при возникновении исключения EnemyDown повышает уровень игры, создает новый объект Enemy с новым уровнем,
     добавляет игроку +5 очков.
 """
+from models import *
+
+def play():
+    name = input("input your name:\n")
+    player = Player(name)
+    level = 1
+    enemy = Enemy(level)
+    while True:
+        player.attack(enemy)
+        player

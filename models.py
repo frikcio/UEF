@@ -23,3 +23,44 @@
     defence(self, enemy_obj) - то же самое, что и метод attack(), только в метод fight первым передается атака
     противника, и при удачной атаке противника вызывается метод decrease_lives игрока.
 """
+from exceptions import *
+import random
+from settings import lives_count
+
+
+class Enemy(object):
+    def __init__(self, level):
+        self.level = level
+        self.lives = level
+
+    def select_attack(self):
+        return random.randint(1, 3)
+
+    def decrease_lives(self):
+        if self.lives == 0:
+            raise EnemyDown()
+        else:
+            self.lives -= 1
+
+
+class Player(object):
+    def __init__(self, name):
+        self.name = name
+        self.score = 0
+        self.lives = lives_count
+
+    def fight(self, attack, defence):
+        if attack == defence:
+            return "It's a draw!"
+
+
+    def attack(self, enemy_obj):
+        enemy_defence = enemy_obj.get_attack()
+        self.player_input = input("input number: (1, 2, 3)\n")
+        self.fight(self.player_input, enemy_defence)
+
+    def decrease_lives(self):
+        if self.lives == 0:
+            raise GameOver(self.name, self.score)
+        else:
+            self.lives -= 1

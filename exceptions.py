@@ -50,11 +50,12 @@ class Table():
                     file.write(dam)
 
 
-score_table = Table()
+
 
 
 class GameOver(Exception):
     def __init__(self, name, score):
+        score_table = Table()
         score_table.update_table(name, score)
 
 
